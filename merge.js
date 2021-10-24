@@ -13,21 +13,27 @@
 //    decrement j
 //    continue;
 var merge = function (nums1, m, nums2, n) {
-  let i = 0; let j = 0;
+  let i = m - 1;
+  let j = n - 1;
+  let end = m + n - 1;
 
-  while (j < nums2.length) {
-    if (nums1[i] === 0) {
-      nums1[i] = nums2[j];
-      i++; j++;
+  while (end >= 0) {
+    if (i < 0) {
+      nums1[end] = nums2[j];
+      console.log(nums1);
+      j--;
+      end--;
       continue;
     }
-    if (nums2[j] < nums1[i]) {
-      let temp = nums1[i];
-      nums1[i] = nums2[j];
-      nums2[j] = temp;
-      i++;
-      continue;
+
+    if (nums2[j] > nums1[i]) {
+      nums1[end] = nums2[j];
+      j--;
+    } else {
+      nums1[end] = nums1[i];
+      i--;
     }
-    i++;
+    end--;
   }
+  console.log(nums1);
 };
