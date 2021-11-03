@@ -14,7 +14,6 @@
 // If values don't match return false
 // If both are terminal nodes, and value match return true
 var isSameTree = function (p, q) {
-  console.log('top');
   if (!p && !q) {
     return true;
   }

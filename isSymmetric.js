@@ -1,23 +1,3 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {boolean}
- */
-// let counter = 1
-// add branches onto queue
-// while stack is not empty
-//   check if palidrone for (counter * 2) items
-//   return false
-//   add sub nodes to queue
-// return true at end of the loop
-
 var isSymmetric = function (root) {
   if (!root) {
     return true;
@@ -27,15 +7,20 @@ var isSymmetric = function (root) {
     return true;
   }
 
-  let size = 2;
+  let size;
   let queue = [];
-  queue.push(root);
   queue.push(root.left);
   queue.push(root.right);
 
-  let start = 1;
   while (queue.length) {
-    for (let i = start; i < queue.length / 2; i++) {
+    size = queue.length;
+    if (queue.length === 1) {
+      return true;
+    }
+    for (let i = 0; i < queue.length / 2; i++) {
+      if (!queue[i] && !queue[queue.length - 1 - i]) {
+        continue;
+      }
       if (!queue[i] && queue[queue.length - 1 - i]) {
         return false;
       }
@@ -46,18 +31,20 @@ var isSymmetric = function (root) {
         return false;
       }
     }
+
     // Add sub nodes
-    for (let i = start; i < queue.length; i++) {
+    for (let i = 0; i < size; i++) {
       if (queue[i]) {
         queue.push(queue[i].left);
         queue.push(queue[i].right);
       }
-
     }
-    start = start + size;
-    size *= 2;
-  }
 
+    // Remove current nodes
+    for (let i = 0; i < size; i++) {
+      queue.shift();
+    }
+  }
   return (true);
 
 };
