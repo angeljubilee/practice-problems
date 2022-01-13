@@ -3,7 +3,6 @@
  * @return {number}
  */
 var findMaxConsecutiveOnes = function (nums) {
-  // create variable for maxNumber
   let maxNumber = 0;
   let currentSequence = 0;
   for (let i = 0; i < nums.length; i++) {
